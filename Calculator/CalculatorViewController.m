@@ -32,9 +32,13 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
+    
     _numberFormatter = [[NSNumberFormatter alloc] init];
     [_numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
     [_numberFormatter setMaximumFractionDigits:10];
+    
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"illusion"]];
+    
     [self clearPressed];
 }
 
@@ -53,8 +57,8 @@
         self.testVariableValues = nil;
     }
     [self setUpVariableDisplay];
-    [CalculatorBrain runProgram:self.brain.program usingVariableValues:self.testVariableValues];
-    self.display.text = [CalculatorBrain descriptionOfProgram:self.brain.program];
+    self.display.text = [self.numberFormatter stringFromNumber:[NSNumber numberWithDouble:[CalculatorBrain runProgram:self.brain.program usingVariableValues:self.testVariableValues]]];
+    self.display.text = [CalculatorBrain descriptionOfProgram:self.brain.program withFormatter:self.numberFormatter];
 }
 
 - (IBAction)digitPressed:(UIButton *)sender 
@@ -81,7 +85,7 @@
     
     [self.brain pushVariable:variable];
 //    self.display.text = [CalculatorBrain descriptionOfProgram:self.brain.program];
-    self.secondaryDisplay.text = [CalculatorBrain descriptionOfProgram:self.brain.program];
+    self.secondaryDisplay.text = [CalculatorBrain descriptionOfProgram:self.brain.program withFormatter:self.numberFormatter];
 
 }
 
@@ -107,7 +111,7 @@
         [self.brain pushOperand:[self.display.text doubleValue]];
         //self.display.text = [CalculatorBrain descriptionOfProgram:self.brain.program];
 //        self.secondaryDisplay.text = [self.secondaryDisplay.text stringByAppendingString:@" "];
-        self.secondaryDisplay.text = [CalculatorBrain descriptionOfProgram:self.brain.program];
+        self.secondaryDisplay.text = [CalculatorBrain descriptionOfProgram:self.brain.program withFormatter:self.numberFormatter];
 
     }
     self.userIsInTheMiddleOfEnteringANumber = NO;
@@ -129,9 +133,8 @@
         return;
     }
     
-    self.display.text = [NSString stringWithFormat:@"%1.2f",[self.brain performOperation:operation]];
-
-    self.secondaryDisplay.text = [CalculatorBrain descriptionOfProgram:self.brain.program];
+    self.display.text = [self.numberFormatter stringFromNumber:[NSNumber numberWithDouble:[self.brain performOperation:operation]]];
+    self.secondaryDisplay.text = [CalculatorBrain descriptionOfProgram:self.brain.program withFormatter:self.numberFormatter];
 //    self.secondaryDisplay.text = [self.secondaryDisplay.text stringByAppendingString:@" "];
 //    self.secondaryDisplay.text = [self.secondaryDisplay.text stringByAppendingString:operation];
 //    self.secondaryDisplay.text = [self.secondaryDisplay.text stringByAppendingString:@" "];

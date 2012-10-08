@@ -13,7 +13,7 @@
 + (NSSet *)variablesUsedInProgram:(id)program;
 + (double)runProgram:(id)program usingVariableValues:(NSDictionary *)variableValues;
 + (double)runProgram:(id)program;
-+ (NSString *)descriptionOfProgram:(id)program;
++ (NSString *)descriptionOfProgram:(id)program withFormatter:(NSNumberFormatter *)formatter;
 + (bool)isOperator:(NSString *)name;
 
 - (void)reset;

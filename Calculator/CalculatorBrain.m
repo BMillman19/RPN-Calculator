@@ -60,7 +60,7 @@
     return [self runProgram:program usingVariableValues:nil];
 }
 
-+ (NSString *)descriptionOfProgram:(id)program
++ (NSString *)descriptionOfProgram:(id)program withFormatter:(NSNumberFormatter *)formatter
 {
     NSString *result;
     NSMutableArray *stack = program;
@@ -69,7 +69,7 @@
     
     if ([topOfStack isKindOfClass:[NSNumber class]])
     {
-        result = [NSString stringWithFormat:@"%f", [topOfStack doubleValue]];
+        result = [formatter stringFromNumber:topOfStack];
     }
     else if ([topOfStack isKindOfClass:[NSString class]])
     {
@@ -77,21 +77,21 @@
         {
             NSString *operation = topOfStack;
             if ([operation isEqualToString:@"+"]) {
-                result = [NSString stringWithFormat:@"(%@ + %@)", [self descriptionOfProgram:stack], [self descriptionOfProgram:stack] ];
+                result = [NSString stringWithFormat:@"(%@ + %@)", [self descriptionOfProgram:stack withFormatter:formatter], [self descriptionOfProgram:stack withFormatter:formatter] ];
             } else if ([@"*" isEqualToString:operation]) {
-                result = [NSString stringWithFormat:@"(%@ * %@)", [self descriptionOfProgram:stack], [self descriptionOfProgram:stack] ];
+                result = [NSString stringWithFormat:@"(%@ * %@)", [self descriptionOfProgram:stack withFormatter:formatter], [self descriptionOfProgram:stack withFormatter:formatter] ];
             } else if ([operation isEqualToString:@"-"]) {
-                NSString *subtrahend = [self descriptionOfProgram:stack];
-                result = [NSString stringWithFormat:@"(%@ - %@)", [self descriptionOfProgram:stack], subtrahend];
+                NSString *subtrahend = [self descriptionOfProgram:stack withFormatter:formatter];
+                result = [NSString stringWithFormat:@"(%@ - %@)", [self descriptionOfProgram:stack withFormatter:formatter], subtrahend];
             } else if ([operation isEqualToString:@"/"]) {
-                NSString *divisor = [self descriptionOfProgram:stack];
-                if (divisor) result = [NSString stringWithFormat:@"(%@ / %@)", [self descriptionOfProgram:stack], divisor];
+                NSString *divisor = [self descriptionOfProgram:stack withFormatter:formatter];
+                if (divisor) result = [NSString stringWithFormat:@"(%@ / %@)", [self descriptionOfProgram:stack withFormatter:formatter], divisor];
             } else if ([operation isEqualToString:@"sin"]) {
-                result = [NSString stringWithFormat:@"sin(%@)", [self descriptionOfProgram:stack]];
+                result = [NSString stringWithFormat:@"sin(%@)", [self descriptionOfProgram:stack withFormatter:formatter]];
             } else if ([operation isEqualToString:@"cos"]) {
-                result = [NSString stringWithFormat:@"cos(%@)", [self descriptionOfProgram:stack]];
+                result = [NSString stringWithFormat:@"cos(%@)", [self descriptionOfProgram:stack withFormatter:formatter]];
             } else if ([operation isEqualToString:@"sqrt"]) {
-                result = [NSString stringWithFormat:@"sqrt(%@)", [self descriptionOfProgram:stack]];
+                result = [NSString stringWithFormat:@"sqrt(%@)", [self descriptionOfProgram:stack withFormatter:formatter]];
             } else if ([operation isEqualToString:@"π"]) {
                 result = @"π";
             }

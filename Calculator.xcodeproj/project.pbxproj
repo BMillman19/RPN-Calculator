@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		E548A54815F947AD00EFCE32 /* CalculatorBrain.m in Sources */ = {isa = PBXBuildFile; fileRef = E548A54715F947AD00EFCE32 /* CalculatorBrain.m */; };
+		E57881C1162361AA00956BA1 /* illusion.png in Resources */ = {isa = PBXBuildFile; fileRef = E57881BF162361AA00956BA1 /* illusion.png */; };
+		E57881C2162361AA00956BA1 /* illusion_@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = E57881C0162361AA00956BA1 /* illusion_@2X.png */; };
+		E57881C51623671000956BA1 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E57881C41623671000956BA1 /* Default-568h@2x.png */; };
 		E5AC07E515F6A750001A1594 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5AC07E415F6A750001A1594 /* UIKit.framework */; };
 		E5AC07E715F6A750001A1594 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5AC07E615F6A750001A1594 /* Foundation.framework */; };
 		E5AC07E915F6A750001A1594 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5AC07E815F6A750001A1594 /* CoreGraphics.framework */; };
@@ -21,6 +24,9 @@
 /* Begin PBXFileReference section */
 		E548A54615F947AD00EFCE32 /* CalculatorBrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalculatorBrain.h; sourceTree = "<group>"; };
 		E548A54715F947AD00EFCE32 /* CalculatorBrain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalculatorBrain.m; sourceTree = "<group>"; };
+		E57881BF162361AA00956BA1 /* illusion.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = illusion.png; sourceTree = "<group>"; };
+		E57881C0162361AA00956BA1 /* illusion_@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "illusion_@2X.png"; sourceTree = "<group>"; };
+		E57881C41623671000956BA1 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
 		E5AC07E015F6A750001A1594 /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5AC07E415F6A750001A1594 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E5AC07E615F6A750001A1594 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -50,9 +56,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E57881BE162361AA00956BA1 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E57881C41623671000956BA1 /* Default-568h@2x.png */,
+				E57881BF162361AA00956BA1 /* illusion.png */,
+				E57881C0162361AA00956BA1 /* illusion_@2X.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		E5AC07D515F6A74F001A1594 = {
 			isa = PBXGroup;
 			children = (
+				E57881BE162361AA00956BA1 /* Resources */,
 				E5AC07EA15F6A750001A1594 /* Calculator */,
 				E5AC07E315F6A750001A1594 /* Frameworks */,
 				E5AC07E115F6A750001A1594 /* Products */,
@@ -156,6 +173,9 @@
 			files = (
 				E5AC07EF15F6A750001A1594 /* InfoPlist.strings in Resources */,
 				E5AC07F815F6A750001A1594 /* MainStoryboard.storyboard in Resources */,
+				E57881C1162361AA00956BA1 /* illusion.png in Resources */,
+				E57881C2162361AA00956BA1 /* illusion_@2X.png in Resources */,
+				E57881C51623671000956BA1 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
