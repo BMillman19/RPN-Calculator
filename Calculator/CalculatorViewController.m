@@ -40,6 +40,9 @@
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"illusion"]];
     
     [self clearPressed];
+    
+    self.variableDisplay.text = @"x = 0 y = 0 z = 0";
+
 }
 
 
@@ -58,15 +61,18 @@
     }
     [self setUpVariableDisplay];
     self.display.text = [self.numberFormatter stringFromNumber:[NSNumber numberWithDouble:[CalculatorBrain runProgram:self.brain.program usingVariableValues:self.testVariableValues]]];
-    self.display.text = [CalculatorBrain descriptionOfProgram:self.brain.program withFormatter:self.numberFormatter];
+    self.secondaryDisplay.text = [CalculatorBrain descriptionOfProgram:self.brain.program withFormatter:self.numberFormatter];
 }
 
 - (IBAction)digitPressed:(UIButton *)sender 
 {
     NSString *digit = [sender currentTitle];
     
+    if (![self.secondaryDisplay.text isEqualToString:@""]) {
+        self.secondaryDisplay.text = [self.secondaryDisplay.text stringByAppendingString:@", " ];
+    }
     self.secondaryDisplay.text = [self.secondaryDisplay.text stringByAppendingString:digit];
-    
+        
     if (self.userIsInTheMiddleOfEnteringANumber) {
         self.display.text = [self.display.text stringByAppendingString:digit];
 
@@ -78,14 +84,15 @@
 
 - (IBAction)variablePressed:(UIButton *)sender
 {
-    NSString *variable = [sender currentTitle];
-    self.secondaryDisplay.text = [self.secondaryDisplay.text stringByAppendingString:variable];
-    self.secondaryDisplay.text = [self.secondaryDisplay.text stringByAppendingString:@" "];
-    self.display.text = variable;
-    
-    [self.brain pushVariable:variable];
-//    self.display.text = [CalculatorBrain descriptionOfProgram:self.brain.program];
-    self.secondaryDisplay.text = [CalculatorBrain descriptionOfProgram:self.brain.program withFormatter:self.numberFormatter];
+    if (!self.userIsEnteringFloatingPointNumber && !self.userIsInTheMiddleOfEnteringANumber) {
+        NSString *variable = [sender currentTitle];
+        self.secondaryDisplay.text = [self.secondaryDisplay.text stringByAppendingString:variable];
+        self.secondaryDisplay.text = [self.secondaryDisplay.text stringByAppendingString:@" "];
+        self.display.text = variable;
+        
+        [self.brain pushVariable:variable];
+        self.secondaryDisplay.text = [CalculatorBrain descriptionOfProgram:self.brain.program withFormatter:self.numberFormatter];
+    }
 
 }
 
@@ -109,9 +116,9 @@
 {
     if (self.userIsInTheMiddleOfEnteringANumber) {
         [self.brain pushOperand:[self.display.text doubleValue]];
-        //self.display.text = [CalculatorBrain descriptionOfProgram:self.brain.program];
-//        self.secondaryDisplay.text = [self.secondaryDisplay.text stringByAppendingString:@" "];
+        
         self.secondaryDisplay.text = [CalculatorBrain descriptionOfProgram:self.brain.program withFormatter:self.numberFormatter];
+
 
     }
     self.userIsInTheMiddleOfEnteringANumber = NO;
@@ -135,9 +142,6 @@
     
     self.display.text = [self.numberFormatter stringFromNumber:[NSNumber numberWithDouble:[self.brain performOperation:operation]]];
     self.secondaryDisplay.text = [CalculatorBrain descriptionOfProgram:self.brain.program withFormatter:self.numberFormatter];
-//    self.secondaryDisplay.text = [self.secondaryDisplay.text stringByAppendingString:@" "];
-//    self.secondaryDisplay.text = [self.secondaryDisplay.text stringByAppendingString:operation];
-//    self.secondaryDisplay.text = [self.secondaryDisplay.text stringByAppendingString:@" "];
 }
 
 - (IBAction)clearPressed 
@@ -152,6 +156,7 @@
 
 -(void)setUpVariableDisplay
 {
+    self.variableDisplay.text = @"";
     if (self.testVariableValues) {
         for (NSString * key in self.testVariableValues) {
             NSString *value = [self.numberFormatter stringFromNumber:[self.testVariableValues objectForKey:key]];
